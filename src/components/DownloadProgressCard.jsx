@@ -213,7 +213,7 @@ export default function DownloadProgressCard({
 
             <div className="complete-btn-group">
               <a
-                href={`/api/download/file/${job.id}`}
+                href={`${(import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '')}/api/download/file/${job.id}`}
                 download={job.filename || 'download.mp4'}
                 className={`btn-action-primary ${!isVideo ? 'btn-audio-action' : ''}`}
                 style={{ textDecoration: 'none' }}

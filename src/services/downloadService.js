@@ -19,11 +19,13 @@ export const JOB_STATUS = {
 // Legacy alias support
 export const DOWNLOAD_STATUS = JOB_STATUS;
 
+const getApiBase = () => (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+
 /**
  * Trigger standard browser download for a ready job
  */
 export const triggerBrowserDownload = (jobId, filename) => {
-  const downloadUrl = `/api/download/file/${jobId}`;
+  const downloadUrl = `${getApiBase()}/api/download/file/${jobId}`;
   const anchor = document.createElement('a');
   anchor.style.display = 'none';
   anchor.href = downloadUrl;
@@ -61,8 +63,10 @@ export const startRealtimeDownloadJob = async ({
     throw new Error('Missing media URL for download.');
   }
 
+  const apiBase = getApiBase();
+
   // 1. Initiate job on backend
-  const response = await fetch('/api/download/job', {
+  const response = await fetch(`${apiBase}/api/download/job`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -91,7 +95,7 @@ export const startRealtimeDownloadJob = async ({
   // 2. Connect to SSE progress stream
   let eventSource = null;
   try {
-    eventSource = new EventSource(`/api/download/progress/${jobId}`);
+    eventSource = new EventSource(`${apiBase}/api/download/progress/${jobId}`);
 
     eventSource.onmessage = (event) => {
       try {
@@ -135,7 +139,8 @@ export const cancelRealtimeDownloadJob = async (jobId) => {
   if (!jobId) return;
 
   try {
-    const response = await fetch('/api/download/cancel', {
+    const apiBase = getApiBase();
+    const response = await fetch(`${apiBase}/api/download/cancel`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -64,7 +64,8 @@ export const analyzeMediaUrl = async (url) => {
 
   // 3. Attempt server-side analysis via yt-dlp API
   try {
-    const response = await fetch('/api/analyze', {
+    const apiBase = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+    const response = await fetch(`${apiBase}/api/analyze`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

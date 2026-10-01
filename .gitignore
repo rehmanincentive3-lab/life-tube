@@ -35,4 +35,6 @@ scratch
 *.webm
 .env
 .env.local
+.agents/
+.agents/*
 

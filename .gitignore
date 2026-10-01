@@ -1,0 +1,38 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Life Tube Media Vault & Temporary Scratch
+temp_media_vault
+temp_media_vault/*
+temp_edge_profile
+scratch
+*.sqlite
+*.mp3
+*.mp4
+*.m4a
+*.webm
+.env
+.env.local
+
